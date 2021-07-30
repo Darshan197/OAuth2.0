@@ -4,7 +4,7 @@
     </h2>
 </x-slot>
 <div class="grid grid-cols-7">
-    <div class="mt-5 col-span-3 col-start-3">
+    <div class="mt-5 col-span-5 col-start-2">
         <div class="bg-white shadow sm:rounded overflow-hidden">
             <div class="bg-gray-50 py-2 px-4 border-b flex justify-between items-center">
                 <h3 class="text-lg font-medium text-gray-700">
@@ -13,15 +13,8 @@
                 <x-jet-button>Create New Client</x-jet-button>
             </div>
             <div class="p-4">
-                @if (count($clients) > 0)
-                    @foreach ($clients as $client)
-                        <span>{{$client->name}}</span>
-                    @endforeach
-                @else
-                    <div>You have not created any OAuth clients.</div>
-                @endif
+                <div id="clients"></div>
             </div>
-            <div id="clients"></div>
         </div>
     </div>
 </div>

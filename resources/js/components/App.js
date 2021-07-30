@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Clients from './Clients'
 
 const App = () => {
     const [oAuthClients, setOAuthClients] = useState([])
@@ -16,7 +17,7 @@ const App = () => {
     }, [])
     return (
         <div>
-            Clients
+            <Clients clients={oAuthClients} />
         </div>
     )
 }

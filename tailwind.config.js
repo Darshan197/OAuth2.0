@@ -8,6 +8,7 @@ module.exports = {
         './vendor/laravel/passport/**/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        './resources/js/**/*.js',
     ],
 
     theme: {

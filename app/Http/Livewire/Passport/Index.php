@@ -3,8 +3,6 @@
 namespace App\Http\Livewire\Passport;
 
 use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
-use Laravel\Passport\Client;
 
 class Index extends Component
 {
@@ -13,8 +11,7 @@ class Index extends Component
 
     public function render()
     {
-        $client = Auth::user()->clients;
-        return view('livewire.passport.index', ['clients' => $client]);
+        return view('livewire.passport.index');
     }
 
     public function create()
