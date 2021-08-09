@@ -1,24 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Clients from './Clients'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Client from './Client'
+import CreateClient from './CreateClient'
 
 const App = () => {
-    const [oAuthClients, setOAuthClients] = useState([])
-
-    const getClients = () => {
-        axios.get('/oauth/clients')
-        .then((data) => {
-            console.log(data);
-            setOAuthClients(data.data)
-        })
-    }
-
-    useEffect(() => {
-        getClients()
-    }, [])
     return (
-        <div>
-            <Clients clients={oAuthClients} />
-        </div>
+        <Router>
+            <Switch>
+                <Route exact path="/credentials" component={Clients} />
+                <Route exact path="/credentials/create" component={CreateClient} />
+                <Route exact path="/credentials/:id" component={Client} />
+            </Switch>
+        </Router>
     )
 }
 

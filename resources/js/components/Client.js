@@ -1,26 +1,22 @@
-import moment from 'moment'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
-const Client = ({ client }) => {
+const Client = () => {
+    const { id } = useParams()
+    const [client, setClient] = useState({});
+    const getClient = () => {
+        axios.get(`/oauth/clients/${id}`)
+        .then((data) => {
+            setClient(data.data)
+        })
+    }
+    useEffect(() => {
+        getClient()
+    }, [])
     return (
-        <table className="min-w-full">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Creation date</th>
-                    <th>Client ID</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><div>{client.name}</div></td>
-                    <td><div>{moment(client.created_at).format('ll')}</div></td>
-                    <td><div>{client.id}</div></td>
-                    <td><a href="#" className="text-blue-600">view</a></td>
-                </tr>
-            </tbody>
-        </table>
+        <div>
+            {client.name}
+        </div>
     )
 }
 

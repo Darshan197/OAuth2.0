@@ -22,4 +22,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/credentials', Index::class)->middleware('auth');;
+Route::get('/credentials/create', Index::class)->middleware('auth');
+Route::get('/credentials', Index::class)->middleware('auth');
