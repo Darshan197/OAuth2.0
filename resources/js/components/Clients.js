@@ -22,17 +22,17 @@ const Clients = () => {
 
     const getClients = () => {
         axios.get('/oauth/clients')
-        .then((data) => {
-            setOAuthClients(data.data)
-        })
+            .then((data) => {
+                setOAuthClients(data.data)
+            })
     }
 
     const deleteClient = (e, clientId) => {
         e.preventDefault()
         axios.delete(`/oauth/clients/${clientId}`)
-        .then(() => {
-            getClients()
-        })
+            .then(() => {
+                getClients()
+            })
     }
 
     useEffect(() => {
@@ -40,28 +40,31 @@ const Clients = () => {
     }, [])
     return (
         <Card header={<Header />}>
-            <table className="min-w-full">
-                <thead>
-                    <tr className="border-b border-gray-200">
-                        <th className="text-left text-xs px-3 py-1">Name</th>
-                        <th className="text-left text-xs px-3 py-1">Creation date</th>
-                        <th className="text-left text-xs px-3 py-1">Client ID</th>
-                        <th className="text-left text-xs px-3 py-1"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        oAuthClients.map((client) => (
-                            <tr key={client.id}>
-                                <td className="text-sm px-3 py-1">{client.name}</td>
-                                <td className="text-sm px-3 py-1"><div>{moment(client.created_at).format('ll')}</div></td>
-                                <td className="text-sm px-3 py-1"><div>{client.id}</div></td>
-                                <td className="text-sm px-3 py-1"><a href="#" className="text-blue-600" onClick={(e) => deleteClient(e, client.id)}>Delete</a></td>
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
+            {oAuthClients.length ? 
+                <table className="min-w-full">
+                    <thead>
+                        <tr className="border-b border-gray-200">
+                            <th className="text-left text-xs px-3 py-1">Name</th>
+                            <th className="text-left text-xs px-3 py-1">Creation date</th>
+                            <th className="text-left text-xs px-3 py-1">Client ID</th>
+                            <th className="text-left text-xs px-3 py-1"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            oAuthClients.map((client) => (
+                                <tr key={client.id}>
+                                    <td className="text-sm px-3 py-1">{client.name}</td>
+                                    <td className="text-sm px-3 py-1"><div>{moment(client.created_at).format('ll')}</div></td>
+                                    <td className="text-sm px-3 py-1"><div>{client.id}</div></td>
+                                    <td className="text-sm px-3 py-1"><a href="#" className="text-blue-600" onClick={(e) => deleteClient(e, client.id)}>Delete</a></td>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </table> : 
+                <div>You have not created any OAuth clients.</div>
+            }
         </Card>
     )
 }
